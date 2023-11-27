@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MagazinComponentePC.Models.ProduseModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <button onclick="location.href='@Url.Action("Create")'" class="btn btn-success">Create New</button>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            @if(User.IsInRole("Admin"))
+                {
+            <th>
+                @Html.DisplayNameFor(model => model.ProdusId)
+            </th>
+                }
+            <th>
+                @Html.DisplayNameFor(model => model.NumeProdus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descriere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pret)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stoc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                @if (User.IsInRole("Admin"))
+                {
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdusId)
+            </td>
+                }
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeProdus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descriere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pret)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stoc)
+            </td>
+            <td>
+                    <button onclick="location.href='@Url.Action("Details", new { id = item.ProdusId })'" class="btn btn-primary">Details</button>
+                @if(User.IsInRole("Admin"))
+                {
+                        <button onclick="location.href='@Url.Action("Edit", new { id = item.ProdusId })'" class="btn btn-warning">Edit</button>
+                }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <button onclick="location.href='@Url.Action("Delete", new { id = item.ProdusId })'" class="btn btn-danger">Delete</button>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

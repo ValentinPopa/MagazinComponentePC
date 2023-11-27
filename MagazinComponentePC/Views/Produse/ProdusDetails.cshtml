@@ -1,0 +1,63 @@
+﻿@model MagazinComponentePC.Models.ProduseModel
+
+@{
+    ViewData["Title"] = "ProdusDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ProdusDetails</h1>
+
+<div>
+    <h4>ProduseModel</h4>
+    <hr />
+    <dl class="row">
+        @if (User.IsInRole("Admin"))
+        {
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.ProdusId)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.ProdusId)
+            </dd>
+        }
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeProdus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumeProdus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descriere)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descriere)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pret)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pret)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stoc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stoc)
+        </dd>
+    </dl>
+    <div>
+        @if (User.IsInRole("User") || User.IsInRole("Admin"))
+        {
+            <button onclick="location.href='@Url.Action("CreateComanda")'" class="btn btn-danger">Comanda</button>
+        }
+    </div>
+	<div>
+		@if (User.IsInRole("Admin"))
+		{
+        <button onclick="location.href='@Url.Action("Edit", new { id = Model.ProdusId })'" class="btn btn-warning">Edit</button>
+        }
+        <br />
+        <button onclick="location.href='@Url.Action("Index")'" class="btn btn-secondary">Back to List</button>
+    </div>
+
+</div>
